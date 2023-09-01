@@ -1,0 +1,28 @@
+const express =  require('express')
+const {
+    getTasks,
+    getTask,
+    createTask,
+    deleteTask,
+    updateTask
+} = require('../controllers/studyController')
+
+const router = express.Router()
+
+// GET all tasks
+router.get('/', getTasks)
+
+// GET a single task
+router.get('/:id',getTask)
+
+// POST new task
+router.post('/', createTask)
+
+// DELETE a task
+router.delete('/:id', deleteTask)
+
+// UPDATE a task
+router.patch('/:id',  updateTask)
+
+
+module.exports = router
