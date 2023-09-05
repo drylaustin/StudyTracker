@@ -1,12 +1,19 @@
 import { useStudyContext } from "../hooks/useStudyContext";
+import { useAuthContext } from "../hooks/useAuthContext";
+
 // date fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 const StudyDetails = ({ task }) => {
   const maxCharacters = 30;
   const { dispatch } = useStudyContext();
+  const { user } = useAuthContext()
 
   const handleClick = async () => {
+
+    if (!user) {
+      return
+    }
     const response = await fetch("/api/tasks/" + task._id, {
       method: "DELETE",
     });

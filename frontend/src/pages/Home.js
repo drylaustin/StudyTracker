@@ -1,34 +1,44 @@
-import { useEffect } from "react"
-import  { useStudyContext } from '../hooks/useStudyContext'
+import { useEffect } from "react";
+import { useStudyContext } from "../hooks/useStudyContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
-import StudyDetails from '../components/StudyDetails'
-import StudyForm from "../components/StudyForm"
+// components
+import StudyDetails from "../components/StudyDetails";
+import StudyForm from "../components/StudyForm";
 
 const Home = () => {
-    const {tasks, dispatch} = useStudyContext()
-    useEffect(() => {
-        const fetchTasks = async () => {
-            const response = await fetch('/api/tasks')
-            const json = await response.json()
+  const { tasks, dispatch } = useStudyContext();
+  const { user } = useAuthContext();
 
-            if (response.ok) {
-             dispatch({type: 'SET_TASKS', payload: json})  
-            }
-        }
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const response = await fetch("/api/tasks", {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
 
-        fetchTasks()
-    }, [dispatch])
+      const json = await response.json();
 
-    return (
-        <div className="home">
-            <div className="tasks">
-                {tasks && tasks.map((task) => (
-                    <StudyDetails key={task._id} task={task} />
-                ))}
-            </div>
-            <StudyForm />
-        </div>
-    )
-}
+      if (response.ok) {
+        dispatch({ type: "SET_TASKS", payload: json });
+      }
+    };
 
-export default Home
+    if (user) {
+      fetchTasks();
+    }
+  }, [dispatch, user]);
+
+  return (
+    <div className="home">
+      <div className="tasks">
+        {tasks &&
+          tasks.map((task) => <StudyDetails key={task._id} task={task} />)}
+      </div>
+      <StudyForm />
+    </div>
+  );
+};
+
+export default Home;

@@ -1,8 +1,11 @@
 import { useState } from "react"
 import { useStudyContext } from "../hooks/useStudyContext"
+import { useAuthContext } from "../hooks/useAuthContext"
 
 const StudyForm = () => {
     const { dispatch } = useStudyContext()
+    const { user } = useAuthContext()
+
     const [topic, setTopic] = useState('')
     const [description, setDescription] = useState('')
     const [link, setLink] = useState('')
@@ -12,13 +15,19 @@ const StudyForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        if (!user) {
+            setError('You must be logged in')
+            return
+        }
+
         const task = {topic, description, link}
 
         const response = await fetch('/api/tasks', {
             method: 'POST',
             body: JSON.stringify(task),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
             }
         })
         const json = await response.json()
