@@ -18,21 +18,22 @@ header .container {
   margin: 0 auto;
   padding: 10px 20px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  
 }
 header a {
   color: #333;
   text-decoration: none;
 }
 header .log {
-  align-items: flex-end;
-  justify-content: flex-end;
+  margin-left: auto;
+  padding-right: 20px;
 }
 
 header .navTitle {
-  align-items: center;
-  justify-content: end
+  flex: 1;
+  margin-left: 120px;
+  text-align: center;
 }  
 
 
