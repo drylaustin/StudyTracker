@@ -1,19 +1,18 @@
-import { useAuthContext } from "./useAuthContext"
-import { useStudyContext } from "./useStudyContext"
+import { useAuthContext } from "./useAuthContext";
+import { useStudyContext } from "./useStudyContext";
 
 export const useLogout = () => {
-    const { dispatch } = useAuthContext()
-    const { dispatch: taskDispatch } = useStudyContext()
+  const { dispatch } = useAuthContext();
+  const { dispatch: taskDispatch } = useStudyContext();
 
+  const logout = () => {
+    // remove user from storage
+    localStorage.removeItem("user");
 
-    const logout = () => {
-        // remove user from storage
-        localStorage.removeItem('user')
+    // dispatch logout action
+    dispatch({ type: "LOGOUT" });
+    taskDispatch({ type: "SET_TASKS", payload: null });
+  };
 
-        // dispatch logout action
-        dispatch({type: 'LOGOUT'})
-        taskDispatch({ type: 'SET_TASKS', payload: null})
-    }
-
-    return {logout}
-}
+  return { logout };
+};
