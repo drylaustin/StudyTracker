@@ -2,6 +2,8 @@ import { createContext, useReducer } from 'react'
 
 export const StudyContext = createContext()
 
+
+// lets go
 export const tasksReducer = (state, action) => {
     switch (action.type) {
         case 'SET_TASKS':
