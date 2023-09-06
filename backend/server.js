@@ -4,14 +4,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const taskRoutes = require("./routes/tasks");
 const userRoutes = require("./routes/user");
-const cors = require('cors')
 
 // express app
 const app = express();
-
-app.use(cors())
   
-
 // middleware
 app.use(express.json());
 
