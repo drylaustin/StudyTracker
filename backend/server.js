@@ -4,9 +4,18 @@ const express = require("express");
 const mongoose = require("mongoose");
 const taskRoutes = require("./routes/tasks");
 const userRoutes = require("./routes/user");
+const cors = require('cors')
 
 // express app
 const app = express();
+
+app.use(cors(
+  {
+    origin: ["https://study-tracker-backend.vercel.app/"],
+    methods: ["POST, GET, DELETE"],
+    credentials: true
+  }
+))
 
 // middleware
 app.use(express.json());
