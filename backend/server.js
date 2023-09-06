@@ -9,13 +9,8 @@ const cors = require('cors')
 // express app
 const app = express();
 
-app.use(cors(
-  {
-    origin: ["https://study-tracker-backend.vercel.app/"],
-    methods: ["POST, GET, DELETE"],
-    credentials: true
-  }
-))
+app.use(cors())
+  
 
 // middleware
 app.use(express.json());
