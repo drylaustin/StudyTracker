@@ -22,7 +22,7 @@ const StudyForm = () => {
 
         const task = {topic, description, link}
 
-        const response = await fetch('/api/tasks', {
+        const response = await fetch('https://study-tracker-backend.vercel.app/api/tasks', {
             method: 'POST',
             body: JSON.stringify(task),
             headers: {

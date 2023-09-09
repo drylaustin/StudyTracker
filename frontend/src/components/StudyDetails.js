@@ -14,7 +14,7 @@ const StudyDetails = ({ task }) => {
     if (!user) {
       return
     }
-    const response = await fetch("/api/tasks/" + task._id, {
+    const response = await fetch("https://study-tracker-backend.vercel.app/api/tasks/" + task._id, {
       method: "DELETE",
     });
     const json = await response.json();
