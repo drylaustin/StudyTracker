@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const response = await fetch("/api/tasks", {
+      const response = await fetch("https://study-tracker-backend.vercel.app/api/tasks", {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
