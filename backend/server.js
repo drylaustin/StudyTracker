@@ -7,6 +7,8 @@ const userRoutes = require("./routes/user");
 
 // express app
 const app = express();
+
+const { API_URL } = process.env
   
 // middleware
 app.use(express.json());
